@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserManualOrderDayEarningsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="login" jdbcType="BIGINT" property="login" />
+    <result column="profit" jdbcType="DECIMAL" property="profit" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, login, profit, `time`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_manual_order_day_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_manual_order_day_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    insert into user_manual_order_day_earnings (id, login, profit, 
+      `time`)
+    values (#{id,jdbcType=BIGINT}, #{login,jdbcType=BIGINT}, #{profit,jdbcType=DECIMAL}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    insert into user_manual_order_day_earnings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+      <if test="profit != null">
+        profit,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=BIGINT},
+      </if>
+      <if test="profit != null">
+        #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    update user_manual_order_day_earnings
+    <set>
+      <if test="login != null">
+        login = #{login,jdbcType=BIGINT},
+      </if>
+      <if test="profit != null">
+        profit = #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    update user_manual_order_day_earnings
+    set login = #{login,jdbcType=BIGINT},
+      profit = #{profit,jdbcType=DECIMAL},
+      `time` = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="calculationUserDayProfit" parameterType="Long" resultType="com.caetp.digiex.entity.UserManualOrderDayEarnings">
+    SELECT SUM(ume.profit) profit, ume.login login, ume.`earnings_time` `time`
+    FROM user_manualorder_earnings ume
+    WHERE TO_DAYS(ume.earnings_time) = TO_DAYS(NOW())
+    GROUP BY login HAVING ume.login = #{login};
+  </select>
+
+  <select id="userDayProfitList" parameterType="integer" resultType="com.caetp.digiex.dto.api.UserManualOrderDayEaringsDTO">
+    SELECT umode.`login`, umode.`profit`, umode.`time`
+    FROM user_manual_order_day_earnings umode
+    WHERE umode.login = #{login} AND DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= umode.`time`
+  </select>
+</mapper>

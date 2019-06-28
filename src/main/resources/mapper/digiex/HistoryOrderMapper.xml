@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.HistoryOrderMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.HistoryOrder">
+    <id column="open_order" jdbcType="VARCHAR" property="openOrder" />
+    <result column="action" jdbcType="INTEGER" property="action" />
+    <result column="close_order" jdbcType="VARCHAR" property="closeOrder" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="commission" jdbcType="VARCHAR" property="commission" />
+    <result column="open_price" jdbcType="DECIMAL" property="openPrice" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="profit" jdbcType="DECIMAL" property="profit" />
+    <result column="rate_margin" jdbcType="DECIMAL" property="rateMargin" />
+    <result column="storage" jdbcType="DECIMAL" property="storage" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="time_msc" jdbcType="BIGINT" property="timeMsc" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="login" jdbcType="BIGINT" property="login" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    open_order, action, close_order, create_time, close_time, comment, commission, open_price, 
+    price, profit, rate_margin, storage, symbol, time_msc, volume, login
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from history_order
+    where open_order = #{openOrder,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from history_order
+    where open_order = #{openOrder,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.HistoryOrder">
+    insert into history_order (open_order, action, close_order, 
+      create_time, close_time, comment, 
+      commission, open_price, price, 
+      profit, rate_margin, storage, 
+      symbol, time_msc, volume, 
+      login)
+    values (#{openOrder,jdbcType=VARCHAR}, #{action,jdbcType=INTEGER}, #{closeOrder,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, 
+      #{commission,jdbcType=VARCHAR}, #{openPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, 
+      #{profit,jdbcType=DECIMAL}, #{rateMargin,jdbcType=DECIMAL}, #{storage,jdbcType=DECIMAL}, 
+      #{symbol,jdbcType=VARCHAR}, #{timeMsc,jdbcType=BIGINT}, #{volume,jdbcType=DOUBLE}, 
+      #{login,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.HistoryOrder">
+    insert into history_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openOrder != null">
+        open_order,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="closeOrder != null">
+        close_order,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="closeTime != null">
+        close_time,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="openPrice != null">
+        open_price,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="profit != null">
+        profit,
+      </if>
+      <if test="rateMargin != null">
+        rate_margin,
+      </if>
+      <if test="storage != null">
+        storage,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="timeMsc != null">
+        time_msc,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openOrder != null">
+        #{openOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=INTEGER},
+      </if>
+      <if test="closeOrder != null">
+        #{closeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="openPrice != null">
+        #{openPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null">
+        #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="rateMargin != null">
+        #{rateMargin,jdbcType=DECIMAL},
+      </if>
+      <if test="storage != null">
+        #{storage,jdbcType=DECIMAL},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="timeMsc != null">
+        #{timeMsc,jdbcType=BIGINT},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.HistoryOrder">
+    update history_order
+    <set>
+      <if test="action != null">
+        action = #{action,jdbcType=INTEGER},
+      </if>
+      <if test="closeOrder != null">
+        close_order = #{closeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="openPrice != null">
+        open_price = #{openPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null">
+        profit = #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="rateMargin != null">
+        rate_margin = #{rateMargin,jdbcType=DECIMAL},
+      </if>
+      <if test="storage != null">
+        storage = #{storage,jdbcType=DECIMAL},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="timeMsc != null">
+        time_msc = #{timeMsc,jdbcType=BIGINT},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="login != null">
+        login = #{login,jdbcType=BIGINT},
+      </if>
+    </set>
+    where open_order = #{openOrder,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.HistoryOrder">
+    update history_order
+    set action = #{action,jdbcType=INTEGER},
+      close_order = #{closeOrder,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR},
+      commission = #{commission,jdbcType=VARCHAR},
+      open_price = #{openPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      profit = #{profit,jdbcType=DECIMAL},
+      rate_margin = #{rateMargin,jdbcType=DECIMAL},
+      storage = #{storage,jdbcType=DECIMAL},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      time_msc = #{timeMsc,jdbcType=BIGINT},
+      volume = #{volume,jdbcType=DOUBLE},
+      login = #{login,jdbcType=BIGINT}
+    where open_order = #{openOrder,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getHistoryOrderByLogin" parameterType="integer" resultType="com.caetp.digiex.entity.HistoryOrder">
+    SELECT ho.open_order openOrder, ho.action `action`, ho.close_order closeOrder,
+    ho.create_time createTime, ho.close_time closeTime, ho.comment `comment`,
+    ho.commission commission, ho.open_price openPrice, ho.price price,
+    ho.profit profit, ho.rate_margin rateMargin, ho.storage `storage`,
+    ho.symbol symbol, ho.time_msc timeMsc, ho.volume volume
+    FROM history_order ho
+    where ho.login = #{login}
+  </select>
+</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserManualOrderEarningsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserManualOrderEarnings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="position" jdbcType="BIGINT" property="position" />
+    <result column="login" jdbcType="BIGINT" property="login" />
+    <result column="msc" jdbcType="TIMESTAMP" property="msc" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="price_sl" jdbcType="DECIMAL" property="priceSl" />
+    <result column="price_tp" jdbcType="DECIMAL" property="priceTp" />
+    <result column="profit" jdbcType="DECIMAL" property="profit" />
+    <result column="swap" jdbcType="DECIMAL" property="swap" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
+    <result column="earnings_time" jdbcType="TIMESTAMP" property="earningsTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `position`, login, msc, Price, price_sl, price_tp, profit, swap, symbol, open_time, 
+    earnings_time, `type`, volume
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_manualorder_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_manualorder_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserManualOrderEarnings">
+    insert into user_manualorder_earnings (id, `position`, login,
+      msc, Price, price_sl, 
+      price_tp, profit, swap, 
+      symbol, open_time, earnings_time, 
+      `type`, volume)
+    values (#{id,jdbcType=BIGINT}, #{position,jdbcType=BIGINT}, #{login,jdbcType=BIGINT}, 
+      #{msc,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{priceSl,jdbcType=DECIMAL}, 
+      #{priceTp,jdbcType=DECIMAL}, #{profit,jdbcType=DECIMAL}, #{swap,jdbcType=DECIMAL}, 
+      #{symbol,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, #{earningsTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=INTEGER}, #{volume,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserManualOrderEarnings">
+    insert into user_manualorder_earnings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="position != null">
+        `position`,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+      <if test="msc != null">
+        msc,
+      </if>
+      <if test="price != null">
+        Price,
+      </if>
+      <if test="priceSl != null">
+        price_sl,
+      </if>
+      <if test="priceTp != null">
+        price_tp,
+      </if>
+      <if test="profit != null">
+        profit,
+      </if>
+      <if test="swap != null">
+        swap,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="openTime != null">
+        open_time,
+      </if>
+      <if test="earningsTime != null">
+        earnings_time,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=BIGINT},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=BIGINT},
+      </if>
+      <if test="msc != null">
+        #{msc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceSl != null">
+        #{priceSl,jdbcType=DECIMAL},
+      </if>
+      <if test="priceTp != null">
+        #{priceTp,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null">
+        #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="swap != null">
+        #{swap,jdbcType=DECIMAL},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null">
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="earningsTime != null">
+        #{earningsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserManualOrderEarnings">
+    update user_manualorder_earnings
+    <set>
+      <if test="position != null">
+        position = #{position,jdbcType=BIGINT},
+      </if>
+      <if test="login != null">
+        login = #{login,jdbcType=BIGINT},
+      </if>
+      <if test="msc != null">
+        msc = #{msc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        Price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceSl != null">
+        price_sl = #{priceSl,jdbcType=DECIMAL},
+      </if>
+      <if test="priceTp != null">
+        price_tp = #{priceTp,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null">
+        profit = #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="swap != null">
+        swap = #{swap,jdbcType=DECIMAL},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null">
+        open_time = #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="earningsTime != null">
+        earnings_time = #{earningsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserManualOrderEarnings">
+    update user_manualorder_earnings
+    set `position` = #{position,jdbcType=BIGINT},
+      login = #{login,jdbcType=BIGINT},
+      msc = #{msc,jdbcType=TIMESTAMP},
+      Price = #{price,jdbcType=DECIMAL},
+      price_sl = #{priceSl,jdbcType=DECIMAL},
+      price_tp = #{priceTp,jdbcType=DECIMAL},
+      profit = #{profit,jdbcType=DECIMAL},
+      swap = #{swap,jdbcType=DECIMAL},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      open_time = #{openTime,jdbcType=TIMESTAMP},
+      earnings_time = #{earningsTime,jdbcType=TIMESTAMP},
+      `type` = #{type,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="UserOrderDayProfitList" parameterType="integer" resultType="com.caetp.digiex.dto.api.UserManualOrderEarningsDTO">
+    SELECT ume.`position` `position`, ume.`profit` profit, ume.`earnings_time` `time`
+    FROM user_manualorder_earnings ume
+    WHERE ume.`login` = #{login} AND ume.`position` = #{orderId} AND DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= ume.`earnings_time`
+  </select>
+</mapper>
